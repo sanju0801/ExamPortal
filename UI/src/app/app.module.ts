@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,6 +18,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ContentComponent } from './main/content/content.component';
 import { MainComponent } from './main/main.component';
 import { HomeComponent } from './main/home/home.component';
+import { AppInterceptor } from './app.interceptor';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -39,9 +41,11 @@ import { HomeComponent } from './main/home/home.component';
     MatFormFieldModule,
     FormsModule,
     FontAwesomeModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true },
     provideAnimationsAsync()
   ],
   bootstrap: [AppComponent]

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppService } from '../../app.service';
 import Swal from 'sweetalert2'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-forgot-password',
@@ -9,17 +10,26 @@ import Swal from 'sweetalert2'
   styleUrls: ['./forgot-password.component.scss']
 })
 export class ForgotPasswordComponent {
-  email: string = '';
   showOtpPopup = false;
   enteredOtp: string = '';
   otp: string = '';
+  forgotPasswordForm: FormGroup;
 
-  constructor(private router: Router, private appService: AppService) { }
+  constructor(private router: Router, private appService: AppService, private fb: FormBuilder) {
+    this.forgotPasswordForm = this.fb.group({
+      email: ['', Validators.required],
+    })
+  }
 
   sendOtp() {
-    this.appService.verify(this.email).subscribe({
-      next: (res : any) => {
-        this.otp = res.OTP;        
+    if (this.forgotPasswordForm.invalid) {
+      Swal.fire("Please fill in all required fields correctly!");
+      return;
+    }
+
+    this.appService.verify(this.forgotPasswordForm.get('email')?.value).subscribe({
+      next: (res: any) => {
+        this.otp = res.OTP;
         this.showOtpPopup = true;
       },
       error: (err) => {
@@ -32,15 +42,14 @@ export class ForgotPasswordComponent {
     });
   }
 
-  verifyOtp() {    
-    console.log(this.enteredOtp, this.otp);
+  verifyOtp() {
     if (this.enteredOtp == this.otp) {
-      this.showOtpPopup = false;      
+      this.showOtpPopup = false;
       this.otp = '';
       this.router.navigate(['/auth/change-password']);
-      this.appService.setMessage(this.email);
+      this.appService.setMessage(this.forgotPasswordForm.get("email")?.value);
     } else {
-      Swal.fire("Please enter correct OTP !!"); 
+      Swal.fire("Please enter correct OTP !!");
     }
   }
 }

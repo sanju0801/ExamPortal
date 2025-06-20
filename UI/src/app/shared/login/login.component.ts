@@ -1,29 +1,39 @@
 import { Component } from '@angular/core';
-import { AppService } from '../../app.service';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
+import { AppService } from '../../app.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+  styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
-  userData = {
-    username: "",
-    password: ""
-  }
-  token: string = "";
-  showPassword: boolean = false;
 
-  constructor(private appService: AppService, private route: Router) { }
+export class LoginComponent {
+  showPassword: boolean = false;
+  token: string = '';
+  loginForm: FormGroup;
+
+  constructor(private appService: AppService, private route: Router, private fb: FormBuilder) { 
+    this.loginForm = this.fb.group({
+    username: new FormControl('', Validators.required),
+    password: new FormControl('', Validators.required),
+  });
+  }
 
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
   }
 
   login() {
-    this.appService.login(this.userData).subscribe({
+    if (this.loginForm.invalid) {
+      Swal.fire("Please fill in all required fields!");
+      return;
+    }
+
+    const userData = this.loginForm.value;
+    this.appService.login(userData).subscribe({
       next: (res: any) => {
         this.token = res.token;
         sessionStorage.setItem('token', this.token);

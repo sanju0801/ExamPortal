@@ -1,23 +1,29 @@
 <div class="background">
     <div class="login-card">
         <h2>Exam Portal</h2>
-        <form>
+        <form [formGroup]="loginForm" (ngSubmit)="login()">
             <div class="input-group">
                 <label for="username">Username</label>
-                <input type="text" id="username" name="username" placeholder="Enter your username"
-                    [(ngModel)]="userData.username" required />
+                <input type="text" id="username" formControlName="username" placeholder="Enter your username"
+                    required />
             </div>
             <div class="input-group">
                 <label for="password">Password</label>
-                <input [type]="showPassword ? 'text' : 'password'" id="password" name="password"
-                    placeholder="Enter your password" name="newPassword2" [(ngModel)]="userData.password" required />
+                <input [type]="showPassword ? 'text' : 'password'" id="password" formControlName="password"
+                    placeholder="Enter your password" required />
                 <span class="toggle-icon" (click)="togglePasswordVisibility()">
                     <i class="fa-solid" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
                 </span>
             </div>
-            <button type="submit" (click)="login()">Login</button>
-            <p class="signup-text">Don't have an account? <a routerLink="/auth/register">Register</a></p>
-            <p class="signup-text">Forgot Password? <a routerLink="/auth/forgot-password">Help?</a></p>
+
+            <button type="submit">Login</button>
+
+            <p class="signup-text">
+                Don't have an account? <a routerLink="/auth/register">Register</a>
+            </p>
+            <p class="signup-text">
+                Forgot Password? <a routerLink="/auth/forgot-password">Help?</a>
+            </p>
         </form>
     </div>
 </div>
