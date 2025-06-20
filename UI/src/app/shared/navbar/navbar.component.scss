@@ -1,0 +1,80 @@
+.navbar {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  z-index: 1000;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+
+  ul {
+    color: white;
+    padding: 0;
+    margin: 0;
+
+    li {
+      list-style-type: none;
+      padding: 0.75rem 1.5rem;
+      margin: 1rem 0;
+      cursor: pointer;
+
+      &:hover {
+        background: rgba(245, 245, 245, 0.1);
+        border-radius: 36px;
+      }
+
+      a {
+        color: white;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+
+        .fa {
+          font-size: 1rem;
+          margin-right: 0.75rem;
+          min-width: 20px;
+        }
+
+        span {
+          transition: opacity 0.2s;
+        }
+      }
+    }
+  }
+
+  &.collapsed {
+    width: 4rem;
+
+    ul li a span {
+      display: none;
+    }
+  }
+
+  .hamburger {
+    margin: 1.5rem;
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: white;
+  }
+
+  @media screen and (max-width: 768px) {
+    &.active {
+      transform: translateX(0%);
+    }
+
+    &.collapsed {
+      width: 0;
+    }
+
+    .hamburger {
+      position: absolute;
+      top: 1rem;
+      right: -3rem;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      padding: 0.5rem;
+      z-index: 1001;
+    }
+  }
+}

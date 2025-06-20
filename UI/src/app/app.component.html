@@ -1,0 +1,11 @@
+<div class="main" *ngIf="isLoggedIn">
+    <div class="navbar" [class.collapsed]="isCollapsed">
+        <app-navbar></app-navbar>
+    </div>
+    <div class="content" [class.collapsed]="isCollapsed">
+        <app-main></app-main>
+    </div>
+</div>
+<div *ngIf="!isLoggedIn">
+    <router-outlet></router-outlet>
+</div>

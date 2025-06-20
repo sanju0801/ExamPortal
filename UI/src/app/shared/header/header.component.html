@@ -1,0 +1,29 @@
+<header class="header">
+    <div class="left">
+        <span class="app-title">Exam Portal</span>
+    </div>
+
+    <div class="center">
+        <input type="text" class="search-input" placeholder="Search...">
+    </div>
+
+    <div class="right">
+        <i class="fa fa-bell notification"></i>
+        <div class="user">
+            <div class="profile" (click)="toggleMenu()">
+                <img src="img/user.png" alt="User" class="avatar">
+                <span class="username">Sanju</span>
+            </div>
+            <ng-template [ngIf]="menu">
+                <div class="menu">
+                    <ul>
+                        <li><a href=""><i class="fa fa-user"></i>Profile</a></li>
+                        <li (click)="logout()">
+                            <a href=""><i class="fa fa-sign-out"></i>Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </ng-template>
+        </div>
+    </div>
+</header>

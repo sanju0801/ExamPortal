@@ -1,0 +1,36 @@
+<div class="background">
+    <div class="login-card">
+        <h2>Exam Portal</h2>
+        <form (submit)="register()">
+            <div class="input-group">
+                <label for="firstname">First Name</label>
+                <input type="text" id="firstname" name="firstname" placeholder="Enter your firstname" [(ngModel)]="userData.firstname" required />
+            </div>
+            <div class="input-group">
+                <label for="lastname">Last Name</label>
+                <input type="text" id="lastname" name="lastname" placeholder="Enter your lastname" [(ngModel)]="userData.lastname" required />
+            </div>
+            <div class="input-group">
+                <label for="username">User Name</label>
+                <input type="text" id="username" name="username" placeholder="Enter your username" [(ngModel)]="userData.username" required />
+            </div>            
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input [type]="showPassword ? 'text' : 'password'" id="newPassword2" name="password" placeholder="Confirm new password"
+                    name="newPassword2" [(ngModel)]="userData.password" required />
+                <span class="toggle-icon" (click)="togglePasswordVisibility()">
+                    <i class="fa-solid" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+                </span>
+            </div>
+            <div class="input-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" [(ngModel)]="userData.email" required />
+            </div>
+            <div class="input-group">
+                <label for="phone">Phone</label>
+                <input type="text" id="phone" name="phone" placeholder="Enter your phone number" [(ngModel)]="userData.phone" required />
+            </div>            
+            <button type="submit">Register</button>
+        </form>
+    </div>
+</div>

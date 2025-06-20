@@ -1,0 +1,11 @@
+<div class="navbar" [class.collapsed]="isCollapsed" [class.active]="!isCollapsed && isMobileView">
+    <ul>
+        <div class="hamburger" (click)="toggleSidebar()">
+            <i class="fa-solid fa-bars"></i>               
+        </div>
+        <li><a href=""><i class="fa fa-home"></i><span *ngIf="!isCollapsed">Home</span></a></li>        
+        <li><a href=""><i class="fa fa-list"></i><span *ngIf="!isCollapsed">Categories</span></a></li>
+        <li><a href=""><i class="fa fa-pencil-square"></i><span *ngIf="!isCollapsed">Exams</span></a></li>
+        <li><a href=""><i class="fa fa-cog"></i><span *ngIf="!isCollapsed">Settings</span></a></li>        
+    </ul>
+</div>
